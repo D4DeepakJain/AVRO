@@ -1,0 +1,27 @@
+# Schema Conversion Delegation Rules
+
+Whenever a user requests any of the following:
+
+* Convert a payload into a Model Class or AVSC file.
+* Add, remove, or modify schema attributes.
+* Synchronize a Model Class with an AVSC schema.
+* Compare two payloads or schema versions.
+* Generate a schema change report.
+
+Delegate the schema conversion task to the custom agent named `Schema Converter`.
+
+Provide the sub-agent with:
+
+1. The user's complete request.
+2. The input payload or its file path.
+3. The relevant existing Model Class and AVSC file paths, if known.
+4. The required target language or model type, if specified.
+5. The requirement to update both output files and generate an additions, deletions, and modifications report.
+
+Allow the Schema Converter agent to inspect the repository and identify the relevant files before making changes.
+
+After the sub-agent completes its work, summarize its results in the main Copilot conversation. Include the updated file paths, schema change counts, validation results, and any breaking changes or unresolved issues.
+
+Do not independently duplicate the schema conversion implementation in the main agent when the Schema Converter agent is available.
+
+If the specialist agent cannot be invoked in the current environment, explain the limitation and ask whether to proceed directly instead.
